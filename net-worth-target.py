@@ -28,9 +28,9 @@ def no_return(age:tuple, monthly_savings:float, net_worth:float) -> float:
     # return the positive result of the quadratic formula
     return (-B+sqrt(D))/(2*A)
 
-def crit_savings(income:float, age:float, monthly_savings:float, xmax:float) -> float:
+def crit_savings(income:float, age:float, net_worth:float, xmax:float) -> float:
     """Return how much one should save in order to reach PAW status."""
-    return (target_nw(income, age, xmax) - monthly_savings)/xmax
+    return (target_nw(income, age, xmax) - net_worth)/xmax
 
 def plotter(income:float, age:float, net_worth:float, savings:float):
 
@@ -71,11 +71,11 @@ if __name__ == '__main__':
     plotter(income, age, nw, savings)
     try:
         xmax = no_return((years, months), savings, nw)
-        min_required = crit_savings(income, age, savings, xmax)
+        min_required = crit_savings(income, age, nw, xmax)
         print(f"\nFor your age, the AAW target is ${target_nw(income, age):.2f}.")
         print(f"You need to save at least ${min_required:.2f} monthly (an extra ${min_required - savings:.2f}) to reach PAW status.")
         
     except:
-        print("You do not save enough to reach PAW status.")
+        print("You do not save enough to reach PAW status or make progress towards the goal.")
     
     print("\nEnd of Program.")
